@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HOME</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(90deg, #FF3CAC,#FFD1A1);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      line-height: 1.6;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    button {
+      background: white;
+      color: #310033;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(37,117,252,0.3);
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #ac626b;
+      color: white;
+      box-shadow: 0 10px 20px rgba(245, 233, 244, 0.432);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      button {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to online shopping</h1>
+  <p>The best shopping experience from the comfort of your home. Explore our diverse products and enjoy exclusive offers.</p>
+  <button id="goToProducts">Let's Shopping</button>
+
+  <script>
+    document.getElementById('goToProducts').addEventListener('click', () => {
+      // ننتقل لصفحة المنتجات
+      window.location.href = 'products.html';
+    });
+  </script>
+</body>
+</html>

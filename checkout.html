@@ -19,6 +19,7 @@
       text-align: center;
       font-size: 24px;
       color: white;
+      box-shadow:0 0 10px rgb(83, 83, 83);
     }
     .container {
       max-width: 800px;
@@ -58,6 +59,10 @@
       font-size: 16px;
       cursor: pointer;
     }
+    .place-order-btn:hover{
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(255, 60, 172, 0.6);
+    }
   </style>
 </head>
 <body>
@@ -71,7 +76,7 @@
       <label for="phone">Phone Number:</label>
       <input type="tel" id="phone" required />
 
-      <label for="address">Shipping Address:</label>
+      <label for="address">Address:</label>
       <input type="text" id="address" required />
 
       <label for="payment">Payment Method:</label>
@@ -80,7 +85,7 @@
         <option value="card">Credit Card</option>
       </select>
        
-      <div id="cardSection" style="display: none;">
+<div id="cardSection" style="display: none;">
   <label>Card Number:</label>
   <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"/>
   <br> 
@@ -102,7 +107,7 @@
         <!-- Order summary will be inserted here -->
       </div>
 
-      <button type="submit" class="place-order-btn">Place Order</button>
+      <button type="submit" class="place-order-btn"> Order</button>
     </form>
   </div>
   

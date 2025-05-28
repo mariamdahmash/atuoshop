@@ -13,17 +13,18 @@
   <header>
     <div class="logo">AutoShop.</div>
     <nav class="nav-links">
-      <a href="#">Home</a>
+      <a href="home.html">Home</a>
       <a href="#">Collection</a>
       <a href="cart.html">Cart</a>
-      <a href="#">Contact</a>
+      <a onclick="location.href='#foot'">Contact</a>
+      <a href="index.html">LogOut</a>
     </nav>
   </header>
 
   <section class="hero">
     <h1>Embrace Peaceful Oasis</h1>
     <p>Discover our collection</p>
-    <button>Shop Now</button>
+    <button onclick="location.href='#productList'">Shop Now</button>
   </section>
 
   <h2 class="section-title">Popular Collection</h2>
@@ -45,7 +46,7 @@
     <i class="fa-solid fa-chevron-left"></i>
   </button>
 
-  <section class="product-list" id="productList">
+  <section  class="product-list" id="productList">
     <!-- Products will render here -->
   </section>
 
@@ -55,15 +56,15 @@
 </div>
 
 <section class="promo-section">
-  <h2>Special Products</h2>
+  <h2>Best Products</h2>
   <div class="promo-images">
     <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" class="img-up" />
     <img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg" class="img-down" />
     <img src="https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg" class="img-up" />
   </div>
 </section>
-
-<footer class="site-footer">
+<br>
+<footer class="site-footer" id="foot">
   <h3>Connect Us</h3>
   <div class="social-icons">
     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
