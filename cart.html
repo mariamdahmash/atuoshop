@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="cart.css" />
+</head>
+<body>
+  <header>
+    <h1>🛒 My Cart</h1>
+    <a href="products.html" style="color: white; text-decoration: underline;">Continue Shopping</a>
+  </header>
+
+  <section class="cart-container" id="cartItems">
+    <!-- Products will be injected here -->
+  </section>
+
+  <div class="cart-container">
+    <div class="total" id="totalAmount">Total: 0 EGP</div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="cart.js"> </script>
+</body>
+</html>

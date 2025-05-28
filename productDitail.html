@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="productDitail.css"
+</head>
+<body>
+  <header>Product Details</header>
+
+  <div class="container" id="productContainer">
+    <!-- Dynamic content will load here -->
+  </div>
+
+  <script src="storage.js"></script>
+  <script>
+    const container = document.getElementById("productContainer");
+
+    // get ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) {
+      container.innerHTML = "<p>Invalid product ID.</p>";
+    } else {
+      const products = loadFromStorage("products") || [];
+      const product = products.find(p => p.id == id);
+
+      if (!product) {
+        container.innerHTML = "<p>Product not found.</p>";
+      } else {
+        container.innerHTML = `
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.title}" />
+          </div>
+          <div class="product-details">
+            <h2>${product.title}</h2>
+            <p>${product.description}</p>
+            <p class="price">${product.price} EGP</p>
+
+            <label>Color:</label>
+            <select id="colorSelect">
+              <option value="Red">Red</option>
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+            </select>
+
+            <label>Size:</label>
+            <select id="sizeSelect">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+          </div>
+        `;
+      }
+    }
+
+    function addToCart(productId) {
+      const color = document.getElementById("colorSelect").value;
+      const size = document.getElementById("sizeSelect").value;
+      const products = loadFromStorage("products") || [];
+      const product = products.find(p => p.id == productId);
+
+      const cart = loadFromStorage("cart") || [];
+
+      const alreadyExists = cart.find(
+        item => item.id === product.id && item.color === color && item.size === size
+      );
+
+      if (alreadyExists) {
+        alert("This variant is already in the cart!");
+        return;
+      }
+
+      cart.push({ ...product, color, size });
+      saveToStorage("cart", cart);
+      alert("✅ Product added to cart!");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #FFA5B0;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      color: white;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .summary {
+      background: #f2f2f2;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .place-order-btn {
+      margin-top: 20px;
+      padding: 12px;
+      background: #FFA5B0;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>Checkout</header>
+
+  <div class="container">
+    <form class="checkout-form" id="checkoutForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required />
+
+      <label for="address">Shipping Address:</label>
+      <input type="text" id="address" required />
+
+      <label for="payment">Payment Method:</label>
+      <select id="payment" required>
+        <option value="cash">Cash on Delivery</option>
+        <option value="card">Credit Card</option>
+      </select>
+       
+      <div id="cardSection" style="display: none;">
+  <label>Card Number:</label>
+  <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"/>
+  <br> 
+  <label>Expiry Date:</label>
+  <input type="text" id="expiry" placeholder="MM/YY" maxlength="5"/>
+  <br> 
+  <label>CVV:</label>
+  <input type="text" id="cvv" placeholder="123" maxlength="4"/>
+
+  <div style="margin-top: 10px;">
+    <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" />
+    <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" />
+    <img src="https://img.icons8.com/color/48/amex.png" alt="Amex" />
+  </div>
+</div>
+
+
+      <div class="summary" id="orderSummary">
+        <!-- Order summary will be inserted here -->
+      </div>
+
+      <button type="submit" class="place-order-btn">Place Order</button>
+    </form>
+  </div>
+  
+  <script src="storage.js"></script>
+  <script>
+    const form = document.getElementById("checkoutForm");
+    const summary = document.getElementById("orderSummary");
+    const cart = loadFromStorage("cart") || [];
+    const cardSection = document.getElementById("cardSection");
+
+    document.getElementById("payment").addEventListener("change", function () {
+  
+  if (this.value === "card") {
+    cardSection.style.display = "block";
+  } else {
+    cardSection.style.display = "none";
+  }
+});
+
+
+    
+    let total = 0;
+    if (cart.length === 0) {
+      summary.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      summary.innerHTML = '<h4>Order Summary:</h4>';
+      cart.forEach(item => {
+        const line = document.createElement("p");
+        line.textContent = `${item.title} (${item.color}, ${item.size}) - ${item.price} EGP`;
+        summary.appendChild(line);
+        total += item.price;
+      });
+      const totalLine = document.createElement("p");
+      totalLine.innerHTML = `<strong>Total: ${total.toFixed(2)} EGP</strong>`;
+      summary.appendChild(totalLine);
+    }
+
+    form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const payment = document.getElementById("payment").value;
+
+  if (!name || !phone || !address) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  
+  const orderItems = cart;
+  const order = {
+    id: Date.now(), 
+    name,
+    phone,
+    address,
+    payment,
+    date: new Date().toLocaleString(),
+    items: orderItems,
+    total: orderItems.reduce((sum, item) => sum + item.price, 0)
+  };
+
+  
+  let orders = loadFromStorage("orders") || [];
+  orders.push(order);
+  saveToStorage("orders", orders);
+
+  
+  saveToStorage("cart", []);
+
+  alert("✅ Order placed successfully!");
+  window.location.href = "products.html";
+});
+
+  </script>
+</body>
+</html>
