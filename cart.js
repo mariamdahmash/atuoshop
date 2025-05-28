@@ -4,7 +4,7 @@ const cartItemsContainer = document.getElementById("cartItems");
 
     function checkout() {
       if (cart.length === 0) {
-        alert("السلة فارغة!");
+        alert("cart is empty!");
         return;
       }
       window.location.href = "checkout.html";

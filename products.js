@@ -26,8 +26,7 @@ function renderProducts(productArray) {
     `;
 
     productList.appendChild(card);
-
-    // ⬅️ كليك على الصورة أو الاسم يفتح صفحة تفاصيل
+    
     card.querySelector(".clickable-img").addEventListener("click", () => {
       window.location.href = `productDitail.html?id=${product.id}`;
     });
@@ -36,7 +35,7 @@ function renderProducts(productArray) {
       window.location.href = `productDitail.html?id=${product.id}`;
     });
 
-    // ⬅️ زر الإضافة للسلة
+    
     const btn = card.querySelector(".add-to-cart-btn");
     btn.addEventListener("click", (event) => {
       event.stopPropagation(); // يمنع تفعيل الكليك بتاع الكارد كله
